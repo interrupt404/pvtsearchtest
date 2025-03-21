@@ -23,10 +23,14 @@ const SearchBar = () => {
 
   const fetchSuggestions = async (input) => {
     setLoading(true);
+    const apiUrl = `${process.env.REACT_APP_SEARCH_API_URL}?query=${input}`;
+
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SEARCH_API_URL}?query=${input}`);
-      if (response.data?.suggestions?.length) {
-        setSuggestions(response.data.suggestions.map((item) => item.name)); // ✅ Only extract `name`
+      const response = await axios.get(apiUrl);
+  
+      // 🔹 Fix: Extract "response.data" instead of "suggestions"
+      if (response.data?.response?.data?.length) {
+        setSuggestions(response.data.response.data.map((item) => item.name));
       } else {
         setSuggestions([]);
       }
