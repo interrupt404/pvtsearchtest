@@ -30,7 +30,7 @@ const SearchBar = () => {
   
       // 🔹 Fix: Extract "response.data" instead of "suggestions"
       if (response.data?.response?.data?.length) {
-        setSuggestions(response.data.response.data.map((item) => item.name));
+        setSuggestions(response.data.response.data.map((item) => item.video_name));
       } else {
         setSuggestions([]);
       }
